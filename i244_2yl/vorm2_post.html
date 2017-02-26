@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+		<title> Registreerimise vorm </title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<form method="post" action="vorm2_post.html">
+			<table border="1">
+				<caption>Registreerimise vorm</caption>
+				<tr>
+					<th>
+						<label for="username-id">Soovitud kasutajanimi:</label>
+					</th>
+					<td>
+						<input type="text" name="username" id="username-id" placeholder="Kasutajanimi" size="20">
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="password-id">Parool:</label>
+					</th>
+					<td>
+						<input type="password" name="password" id="password-id" placeholder="parool">
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="password2-id">Korda parooli:</label>
+					</th>
+					<td>
+						<input type="password" name="password2" id="password2-id" placeholder="parool">
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="tegevusala">Tegevusala:</label>
+					</th>
+					<td>
+						<select id="tegevusala" name="tegevusala">
+							<option value="õpilane">Õpilane</option>
+							<option value="tudeng">Tudeng</option>
+							<option value="töötan">Töötan</option>
+							<option value="pensionär">Pensionär</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit">Registreeri</button>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<label for="kirjeldus-id">Kirjelda ennast:</label>
+			<textarea rows="10" cols="50" name="Kirjelda ennast" id="kirjeldus-id" placeholder="Lisa kirjedus">
+			</textarea>
+		</form>
+	</body>
+</html>

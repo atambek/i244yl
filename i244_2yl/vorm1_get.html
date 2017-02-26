@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Vorm 1</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<form method="get" action="vorm1_get.html">
+			<label for="authtype-id">Autentimisviis:</label>
+			<select id="authtype-id">
+				<option value="Windows authentication" name="win_auth">Windows authentication</option>
+				<option value="Forms authentication" name="form_auth" selected>Forms authentication</option>
+			</select>
+			<br>
+			<br>
+			<br>
+			<label for="username-id">Kasutajanimi:</label>
+			<input type="text" name="username" id="username-id" placeholder="Kasutajanimi" size="20">
+			<br>
+			<br>
+			<label for="password-id">Parool:</label>
+			<input type="password" name="password" id="password-id" placeholder="parool">
+			<br>
+			<br>
+			<label>
+				Pea mind meeles <input type="checkbox" name="remember_me">
+			</label>
+			<br>
+			<br>
+			<button type="submit">Logi sisse</button>
+		</form>
+	</body>
+</html>
