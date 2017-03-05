@@ -1,8 +1,53 @@
 body {
-    background-color: lightblue;
-}
+			background-color:lightblue;
+		}
 
-h1 {
-    color: navy;
-    margin-left: 20px;
-}
+		h1 {
+			color:navy;
+			margin-left:20px;
+		}
+
+		h2 {
+			color:red;
+			text-align:center;
+		}
+		
+		h3 {
+			color:orange;
+			text-align:center;
+		}
+		
+		h4 {
+			color:darkgreen;
+			text-align:center;
+		}
+		
+		h5 {
+			color:lightgreen;
+			text-align:center;
+		}
+		p {
+			font-style:italic;
+		}
+
+		.intro_text {
+			background-color:yellow;
+			font-family:monospace;
+		}
+
+		.profile_pic {
+			width:512px;
+			height:384px;
+		}
+		ul {
+			list-style-image:url('pics/SmartWatch1_thumb.jpg');
+		}
+		#introduction {
+			text-align:justify;
+			border
+		}
+		p.introduction {
+			border-style:dashed;
+			border-radius:5px;
+			background-color:lightgray;
+		}
