@@ -1,0 +1,18 @@
+<?php
+	require_once('head.html');
+	$msg = "";
+	if (isset($_POST['pilt']) && $_POST['pilt']!="") {
+		$file=$_POST['pilt'];
+		$_SESSION['voted_for'] = $file;
+	} else if (isset($_SESSION['voted_for'])) {
+		$file=$_SESSION['voted_for'];
+	} else {
+		unset($_SESSION['voted_for']);
+		$msg = "Valik jäi tegemata!";
+	}
+?>
+<div id="wrap">
+	<h3>Valiku tulemus</h3>
+	<p>Siia tuleb valiku tulemus, mida saab kuvada ainult PHP abil :)</p>
+	<p><?php if (isset($file) && $file!="") {echo "<img src=$file alt=$file />";} else {echo $msg;} ?></p>
+</div>
