@@ -1,0 +1,10 @@
+<?php foreach ($puurid as $key=>$puur):?>
+	<div>
+		<h>Puur <?php echo $key?></h>
+		<br>
+		<?php foreach ($puur as $key2=>$loom):?>
+			<img src="<?php echo $loom['liik'];?>" title="<?php echo $loom['nimi'];?>">
+		<?php endforeach; ?>
+	</div>
+	<br>
+<?php endforeach; ?>
