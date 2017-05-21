@@ -19,9 +19,9 @@ function logi() {
 		include_once('views/login.html');
 	}
 	
-		if ($_SERVER['REQUEST_METHOD']=='GET'){
-			include_once('views/login.html');
-		}
+	if ($_SERVER['REQUEST_METHOD']=='GET'){
+		include_once('views/login.html');
+	}
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		if (empty($_POST['user'])) {
 			$errors[] = "Kasutajanimi on puudu!";
@@ -38,7 +38,10 @@ function logi() {
 			$users_query ="SELECT * FROM atambek_kylastajad WHERE username = '$trim_user' AND passw = SHA1('$trim_pass')";	
 			$users_result=mysqli_query($connection, $users_query) or die("$users_query - ".mysqli_error($connection));
 			if (mysqli_num_rows($users_result) != 0){
-				$_SESSION['user'] = mysqli_fetch_assoc($users_result);
+				$row = mysqli_fetch_assoc($users_result);
+				$_SESSION['user'] = $row["username"];
+				//$_SESSION['user'] = mysqli_fetch_assoc($users_result);
+				$_SESSION['roll'] = $row["Roll"];
 				kuva_puurid();
 			}else{
 				$errors[] = "Kasutajanimi või parool on vale";
@@ -81,8 +84,10 @@ function lisa() {
 	global $connection;
 	if (empty($_SESSION['user'])) {
 		include_once('views/login.html');
-	} else {
+	} else if ($_SESSION['roll'] == 'admin'){
 		include_once('views/loomavorm.html');
+	} else {
+		kuva_puurid();
 	}
 	
 	if ($_SERVER['REQUEST_METHOD']=='GET'){
@@ -147,6 +152,71 @@ function upload($name) {
 		}
 	} else {
 		return "";
+	}
+}
+function hangi_loom($id){
+	global $connection;
+	$loom_query = "SELECT * FROM atambek_loomaaed WHERE id=".mysqli_real_escape_string($connection,$id);
+	$loom = mysqli_query($connection, $loom_query) or die("$loom_query - ".mysqli_error($connection));
+	if (mysqli_num_rows($loom) == 0){
+		kuva_puurid();
+	} else {
+		$row = mysqli_fetch_assoc($loom);
+		return $row;
+	}
+}
+function muuda() {
+	// siia on vaja funktsionaalsust (13. nädalal)
+	global $connection;
+	if (empty($_SESSION['user'])) {
+		include_once('views/login.html');
+	} else if ($_SESSION['roll'] == 'admin'){
+		if ($_SERVER['REQUEST_METHOD']=='GET'){
+			if (empty($_GET['id'])) {
+				kuva_puurid();
+			} else {
+				$loom = hangi_loom($_GET['id']);
+				$loom_id = $_GET['id'];
+				include_once('views/editform.html');
+			}
+		}
+	
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			if (empty($_POST['id'])) {
+				kuva_puurid();
+			} else {
+				$loom = hangi_loom($_POST['id']);
+				$loom_id = $_POST['id'];
+				include_once('views/editform.html');
+			}
+			if (empty($_POST['nimi'])) {
+				$errors[] = "Nimi on määramata!";
+			}
+			if (empty($_POST['vanus'])) {
+				$errors[] = "Vanus on määramata!";
+			}
+			if (empty($_POST['puur'])) {
+				$errors[] = "Puuri on määramata!";
+			}
+
+			$nimi = mysqli_real_escape_string($connection, $_POST['nimi']);
+			$vanus = mysqli_real_escape_string($connection, $_POST['vanus']);
+			$puur = mysqli_real_escape_string($connection, $_POST['puur']);
+			$liik = mysqli_real_escape_string($connection, "pildid/" . $_FILES["liik"]["name"]);
+		
+			upload($liik);
+		    
+			if (empty($errors)) {
+				$query = "UPDATE atambek_loomaaed SET nimi='$nimi', vanus = $vanus, puur ='$puur', liik = '$liik' WHERE ID='$loom_id'";
+				$result = mysqli_query($connection, $query);
+				if (mysqli_affected_rows($connection) > 0) {
+					include_once('views/loomavorm.html');
+				} else {
+					header("Location: ?page=pealeht");
+				}
+			}
+		}
+		include_once('views/editform.html');
 	}
 }
 ?>

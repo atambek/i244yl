@@ -4,6 +4,9 @@
 		<br>
 		<?php foreach ($puur as $key2=>$loom):?>
 			<img src="<?php echo $loom['liik'];?>" title="<?php echo $loom['nimi'];?>">
+			<?php if($_SESSION['roll'] == 'admin'): ?>
+				<a href="?page=muuda&id=<?php echo $loom['ID'];?>" > loom<?php echo $loom['ID'];?> </a>
+			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
 	<br>
